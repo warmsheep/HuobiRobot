@@ -16,12 +16,12 @@ public enum CoinType {
 	LTC(2, "莱特币");
 	
 
-	private String name;
-	private int index;
+	private String value;
+	private int key;
 
-	private CoinType(int index, String name) {
-		this.index = index;
-		this.name = name;
+	private CoinType(int key, String value) {
+		this.key = key;
+		this.value = value;
 	}
 
 	/**
@@ -31,7 +31,7 @@ public enum CoinType {
 		if (null == index)
 			return null;
 		for (CoinType at : CoinType.values()) {
-			if (at.index == index)
+			if (at.key == index)
 				return at;
 		}
 		return null;
@@ -40,11 +40,11 @@ public enum CoinType {
 	/**
 	 * 通过名称获得枚举
 	 */
-	public static CoinType getByName(String name) {
-		if (StringUtils.isBlank(name))
+	public static CoinType getByValue(String value) {
+		if (StringUtils.isBlank(value))
 			return null;
 		for (CoinType at : CoinType.values()) {
-			if (at.name.equals(name))
+			if (at.value.equals(value))
 				return at;
 		}
 		return null;
@@ -52,20 +52,20 @@ public enum CoinType {
 
 	@Override
 	public String toString() {
-		return this.index + ":" + this.name;
+		return this.key + ":" + this.value;
 	}
 	
-	public String getName() {
-		return name;
+	public String getValue() {
+		return value;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setValue(String value) {
+		this.value = value;
 	}
 
-	public int getIndex() {
-		return index;
+	public int getKey() {
+		return key;
 	}
-	public void setIndex(int index) {
-		this.index = index;
+	public void setKey(int key) {
+		this.key = key;
 	}
 }

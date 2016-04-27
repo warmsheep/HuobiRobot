@@ -81,10 +81,12 @@ public class HttpUtil {
     public static <T> T post(String url, Map<String, Object> data, ResponseHandler<T> rh) throws ClientProtocolException,
             IOException {
         List<NameValuePair> nvps = new ArrayList<NameValuePair>();
-        for (Map.Entry<String, Object> me : data.entrySet()) {
-            if (me.getValue() != null) {
-                nvps.add(new BasicNameValuePair(me.getKey(), me.getValue().toString()));
-            }
+        if(data != null){
+        	 for (Map.Entry<String, Object> me : data.entrySet()) {
+                 if (me.getValue() != null) {
+                     nvps.add(new BasicNameValuePair(me.getKey(), me.getValue().toString()));
+                 }
+             }
         }
         return post(url, new UrlEncodedFormEntity(nvps, DEFAULT_ENCODING), rh);
     }

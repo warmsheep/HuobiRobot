@@ -24,13 +24,16 @@
 		<profile>
 			<id>test</id>
 			<properties>
-				<dubbo.registry.address>zookeeper200-test:2181</dubbo.registry.address>
+				<dubbo.registry.address>192.168.1.200:2183</dubbo.registry.address>
 				<db.driver>com.mysql.jdbc.Driver</db.driver>
-				<db.url>jdbc:mysql://mysql200-test:3306/wpDB?useUnicode=true&amp;characterEncoding=utf-8&amp;allowMultiQueries=true</db.url>
+				<db.url>jdbc:mysql://192.168.1.200:3312/robotSeed?useUnicode=true&amp;characterEncoding=utf-8&amp;allowMultiQueries=true</db.url>
 				<db.username>root</db.username>
 				<db.password>ZPN0P6uh/lA+L/T9PY7IoZbd/Md3005U5CvuOF2NZIgCqdFGl14NqbYWcDos2A5JrbbjyAVW9AE86P+ZRw33sQ==</db.password>
 				<db.minIdle>1</db.minIdle>
 				<db.maxActive>100</db.maxActive>
+				<redis.host>192.168.1.200</redis.host> 
+				<redis.port>6383</redis.port>
+				<huobi.api.url>https://api.huobi.com/apiv3</huobi.api.url>
 			</properties>
 			<activation>
 				<activeByDefault>true</activeByDefault><!--默认启用的是dev环境配置 -->
@@ -156,19 +159,19 @@
 	</build>
 
 	<dependencies>
-		<!-- <dependency>
-			<groupId>org.warmsheep</groupId>
-			<artifactId>wp-common</artifactId>
-			<version>${wp-common.version}</version>
-		</dependency>
-
+		
+		<!-- 
 		<dependency>
 			<groupId>org.warmsheep</groupId>
 			<artifactId>wp-facade</artifactId>
 			<version>${wp-facade.version}</version>
 		</dependency> -->
 
-
+ 		<dependency>
+			<groupId>org.warmsheep</groupId>
+			<artifactId>wp-common</artifactId>
+			<version>${wp-common.version}</version>
+		</dependency>
 		<!-- Spring Dependency Begin -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -227,7 +230,7 @@
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
-			<version>4.3.3</version>
+			<version>4.2.1</version>
 		</dependency>
 		<!-- dubbo required jars end -->
 

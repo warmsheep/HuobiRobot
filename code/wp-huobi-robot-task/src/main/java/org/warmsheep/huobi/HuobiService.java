@@ -5,6 +5,16 @@ import java.util.TreeMap;
 import org.apache.commons.lang.StringUtils;
 
 public class HuobiService extends BaseService{
+	
+	private String huobiAccessKey;
+	private String huobiSecretKey;
+	private String huobiApiUrl;
+	
+	public HuobiService(String huobiAccessKey,String huobiSecretKey,String huobiApiUrl){
+		this.huobiAccessKey = huobiAccessKey;
+		this.huobiSecretKey = huobiSecretKey;
+		this.huobiApiUrl = huobiApiUrl;
+	}
 
 	/**
 	 * 下单接口
@@ -23,8 +33,8 @@ public class HuobiService extends BaseService{
 		TreeMap<String, Object> paraMap = new TreeMap<String, Object>();
 		paraMap.put("method", method);
 		paraMap.put("created", getTimestamp());
-		paraMap.put("access_key", HUOBI_ACCESS_KEY);
-		paraMap.put("secret_key", HUOBI_SECRET_KEY);
+		paraMap.put("access_key", huobiAccessKey);
+		paraMap.put("secret_key", huobiSecretKey);
 		paraMap.put("coin_type", coinType);
 		paraMap.put("price", price);
 		paraMap.put("amount", amount);
@@ -37,7 +47,7 @@ public class HuobiService extends BaseService{
 		if (null != tradeid) {
 			paraMap.put("trade_id", tradeid);
 		}
-		return post(paraMap, HUOBI_API_URL);
+		return post(paraMap, huobiApiUrl);
 	}
 
 	/**
@@ -56,8 +66,8 @@ public class HuobiService extends BaseService{
 		TreeMap<String, Object> paraMap = new TreeMap<String, Object>();
 		paraMap.put("method", method);
 		paraMap.put("created", getTimestamp());
-		paraMap.put("access_key", HUOBI_ACCESS_KEY);
-		paraMap.put("secret_key", HUOBI_SECRET_KEY);
+		paraMap.put("access_key", huobiAccessKey);
+		paraMap.put("secret_key", huobiSecretKey);
 		paraMap.put("coin_type", coinType);
 		paraMap.put("amount", amount);
 		String md5 = sign(paraMap);
@@ -69,7 +79,7 @@ public class HuobiService extends BaseService{
 		if (null != tradeid) {
 			paraMap.put("trade_id", tradeid);
 		}
-		return post(paraMap, HUOBI_API_URL);
+		return post(paraMap, huobiApiUrl);
 	}
 
 	/**
@@ -85,14 +95,14 @@ public class HuobiService extends BaseService{
 		TreeMap<String, Object> paraMap = new TreeMap<String, Object>();
 		paraMap.put("method", method);
 		paraMap.put("created", getTimestamp());
-		paraMap.put("access_key", HUOBI_ACCESS_KEY);
-		paraMap.put("secret_key", HUOBI_SECRET_KEY);
+		paraMap.put("access_key", huobiAccessKey);
+		paraMap.put("secret_key", huobiSecretKey);
 		paraMap.put("coin_type", coinType);
 		paraMap.put("id", id);
 		String md5 = sign(paraMap);
 		paraMap.remove("secret_key");
 		paraMap.put("sign", md5);
-		return post(paraMap, HUOBI_API_URL);
+		return post(paraMap, huobiApiUrl);
 	}
 
 	/**
@@ -106,12 +116,12 @@ public class HuobiService extends BaseService{
 		TreeMap<String, Object> paraMap = new TreeMap<String, Object>();
 		paraMap.put("method", method);
 		paraMap.put("created", getTimestamp());
-		paraMap.put("access_key", HUOBI_ACCESS_KEY);
-		paraMap.put("secret_key", HUOBI_SECRET_KEY);
+		paraMap.put("access_key", huobiAccessKey);
+		paraMap.put("secret_key", huobiSecretKey);
 		String md5 = sign(paraMap);
 		paraMap.remove("secret_key");
 		paraMap.put("sign", md5);
-		return post(paraMap, HUOBI_API_URL);
+		return post(paraMap, huobiApiUrl);
 	}
 
 	/**
@@ -126,13 +136,13 @@ public class HuobiService extends BaseService{
 		TreeMap<String, Object> paraMap = new TreeMap<String, Object>();
 		paraMap.put("method", method);
 		paraMap.put("created", getTimestamp());
-		paraMap.put("access_key", HUOBI_ACCESS_KEY);
-		paraMap.put("secret_key", HUOBI_SECRET_KEY);
+		paraMap.put("access_key", huobiAccessKey);
+		paraMap.put("secret_key", huobiSecretKey);
 		paraMap.put("coin_type", coinType);
 		String md5 = sign(paraMap);
 		paraMap.remove("secret_key");
 		paraMap.put("sign", md5);
-		return post(paraMap, HUOBI_API_URL);
+		return post(paraMap, huobiApiUrl);
 	}
 
 	/**
@@ -148,14 +158,14 @@ public class HuobiService extends BaseService{
 		TreeMap<String, Object> paraMap = new TreeMap<String, Object>();
 		paraMap.put("method", method);
 		paraMap.put("created", getTimestamp());
-		paraMap.put("access_key", HUOBI_ACCESS_KEY);
-		paraMap.put("secret_key", HUOBI_SECRET_KEY);
+		paraMap.put("access_key", huobiAccessKey);
+		paraMap.put("secret_key", huobiSecretKey);
 		paraMap.put("coin_type", coinType);
 		paraMap.put("trade_id", tradeid);
 		String md5 = sign(paraMap);
 		paraMap.remove("secret_key");
 		paraMap.put("sign", md5);
-		return post(paraMap, HUOBI_API_URL);
+		return post(paraMap, huobiApiUrl);
 	}
 
 	/**
@@ -170,13 +180,13 @@ public class HuobiService extends BaseService{
 		TreeMap<String, Object> paraMap = new TreeMap<String, Object>();
 		paraMap.put("method", method);
 		paraMap.put("created", getTimestamp());
-		paraMap.put("access_key", HUOBI_ACCESS_KEY);
-		paraMap.put("secret_key", HUOBI_SECRET_KEY);
+		paraMap.put("access_key", huobiAccessKey);
+		paraMap.put("secret_key", huobiSecretKey);
 		paraMap.put("coin_type", coinType);
 		String md5 = sign(paraMap);
 		paraMap.remove("secret_key");
 		paraMap.put("sign", md5);
-		return post(paraMap, HUOBI_API_URL);
+		return post(paraMap, huobiApiUrl);
 	}
 
 	/**
@@ -192,14 +202,14 @@ public class HuobiService extends BaseService{
 		TreeMap<String, Object> paraMap = new TreeMap<String, Object>();
 		paraMap.put("method", method);
 		paraMap.put("created", getTimestamp());
-		paraMap.put("access_key", HUOBI_ACCESS_KEY);
-		paraMap.put("secret_key", HUOBI_SECRET_KEY);
+		paraMap.put("access_key", huobiAccessKey);
+		paraMap.put("secret_key", huobiSecretKey);
 		paraMap.put("coin_type", coinType);
 		paraMap.put("id", id);
 		String md5 = sign(paraMap);
 		paraMap.remove("secret_key");
 		paraMap.put("sign", md5);
-		return post(paraMap, HUOBI_API_URL);
+		return post(paraMap, huobiApiUrl);
 	}
 
 	/**
@@ -219,8 +229,8 @@ public class HuobiService extends BaseService{
 		TreeMap<String, Object> paraMap = new TreeMap<String, Object>();
 		paraMap.put("method", method);
 		paraMap.put("created", getTimestamp());
-		paraMap.put("access_key", HUOBI_ACCESS_KEY);
-		paraMap.put("secret_key", HUOBI_SECRET_KEY);
+		paraMap.put("access_key", huobiAccessKey);
+		paraMap.put("secret_key", huobiSecretKey);
 		paraMap.put("coin_type", coinType);
 		paraMap.put("price", price);
 		paraMap.put("amount", amount);
@@ -233,7 +243,7 @@ public class HuobiService extends BaseService{
 		if (null != tradeid) {
 			paraMap.put("trade_id", tradeid);
 		}
-		return post(paraMap, HUOBI_API_URL);
+		return post(paraMap, huobiApiUrl);
 	}
 
 	/**
@@ -252,8 +262,8 @@ public class HuobiService extends BaseService{
 		TreeMap<String, Object> paraMap = new TreeMap<String, Object>();
 		paraMap.put("method", method);
 		paraMap.put("created", getTimestamp());
-		paraMap.put("access_key", HUOBI_ACCESS_KEY);
-		paraMap.put("secret_key", HUOBI_SECRET_KEY);
+		paraMap.put("access_key", huobiAccessKey);
+		paraMap.put("secret_key", huobiSecretKey);
 		paraMap.put("coin_type", coinType);
 		paraMap.put("amount", amount);
 		String md5 = sign(paraMap);
@@ -265,6 +275,14 @@ public class HuobiService extends BaseService{
 		if (null != tradeid) {
 			paraMap.put("trade_id", tradeid);
 		}
-		return post(paraMap, HUOBI_API_URL);
+		return post(paraMap, huobiApiUrl);
+	}
+	
+	public String getMinuteData()throws Exception {
+		return post(null, "http://api.huobi.com/staticmarket/btc_kline_001_json.js");
+	}
+	
+	public String getRealTimeData()throws Exception {
+		return post(null, "http://api.huobi.com/staticmarket/ticker_btc_json.js");
 	}
 }

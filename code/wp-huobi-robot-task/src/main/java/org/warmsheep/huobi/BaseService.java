@@ -10,20 +10,16 @@ import org.apache.http.client.ResponseHandler;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+import org.warmsheep.constants.PropertiesConstants;
 import org.warmsheep.util.EncryptUtil;
 import org.warmsheep.util.HttpUtil;
+import org.warmsheep.util.properties.ConfigReader;
 
+@Service("baseService")
 public class BaseService {
 
 	private Logger logger = LoggerFactory.getLogger(BaseService.class);
-	//火币现货配置信息
-	public static String HUOBI_ACCESS_KEY = "";
-	public static String HUOBI_SECRET_KEY = "";
-	public static String HUOBI_API_URL = "https://api.huobi.com/apiv3";
-	
-	//bitvc现货，期货共用accessKey,secretKey配置信息
-	public static String BITVC_ACCESS_KEY = "";
-	public static String BITVC_SECRET_KEY = "";
 
 	protected static int success = 200;
 	

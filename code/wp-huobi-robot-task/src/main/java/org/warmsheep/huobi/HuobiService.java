@@ -278,10 +278,19 @@ public class HuobiService extends BaseService{
 		return post(paraMap, huobiApiUrl);
 	}
 	
+	/**
+	 * 获取一分钟线
+	 * @return
+	 * @throws Exception
+	 */
 	public String getMinuteData()throws Exception {
 		return post(null, "http://api.huobi.com/staticmarket/btc_kline_001_json.js");
 	}
-	
+	/**
+	 * 获取实时价格
+	 * @return
+	 * @throws Exception
+	 */
 	public String getRealTimeData()throws Exception {
 		return post(null, "http://api.huobi.com/staticmarket/ticker_btc_json.js");
 	}

@@ -3,6 +3,7 @@ package org.warmsheep.huobi;
 import java.util.TreeMap;
 
 import org.apache.commons.lang.StringUtils;
+import org.warmsheep.enums.CoinType;
 
 public class HuobiService extends BaseService{
 	
@@ -283,15 +284,25 @@ public class HuobiService extends BaseService{
 	 * @return
 	 * @throws Exception
 	 */
-	public String getMinuteData()throws Exception {
-		return post(null, "http://api.huobi.com/staticmarket/btc_kline_001_json.js");
+	public String getMinuteData(int coinType)throws Exception {
+		if(coinType == CoinType.BTC.getKey()){
+			return post(null, "http://api.huobi.com/staticmarket/btc_kline_001_json.js");
+		} else if(coinType == CoinType.LTC.getKey()){
+			return post(null, "http://api.huobi.com/staticmarket/ltc_kline_001_json.js");
+		}
+		return null;
 	}
 	/**
 	 * 获取实时价格
 	 * @return
 	 * @throws Exception
 	 */
-	public String getRealTimeData()throws Exception {
-		return post(null, "http://api.huobi.com/staticmarket/ticker_btc_json.js");
+	public String getRealTimeData(int coinType)throws Exception {
+		if(coinType == CoinType.BTC.getKey()){
+			return post(null, "http://api.huobi.com/staticmarket/ticker_btc_json.js");
+		}else if(coinType == CoinType.LTC.getKey()){
+			return post(null, "http://api.huobi.com/staticmarket/ticker_ltc_json.js");
+		}
+		return null;
 	}
 }

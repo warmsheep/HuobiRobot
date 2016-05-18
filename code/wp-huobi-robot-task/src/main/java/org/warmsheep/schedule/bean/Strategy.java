@@ -18,6 +18,8 @@ public class Strategy {
 	private BigDecimal upCommingPrice;		//看涨入场价格
 	private BigDecimal downCommingPrice;	//看空入场价格
 	
+	private BigDecimal transCount;			//交易数量
+	
 	/**
 	 * 货币类型
 	 * @return
@@ -46,16 +48,31 @@ public class Strategy {
 	public void setTransMode(int transMode) {
 		this.transMode = transMode;
 	}
-	
+	/**
+	 * 看涨入场价格
+	 * @return
+	 */
 	public BigDecimal getUpCommingPrice() {
 		return upCommingPrice;
 	}
+	/**
+	 * 看涨入场价格
+	 * @param upCommingPrice
+	 */
 	public void setUpCommingPrice(BigDecimal upCommingPrice) {
 		this.upCommingPrice = upCommingPrice;
 	}
+	/**
+	 * 看空入场价格
+	 * @return
+	 */
 	public BigDecimal getDownCommingPrice() {
 		return downCommingPrice;
 	}
+	/**
+	 * 看空入场价格
+	 * @param downCommingPrice
+	 */
 	public void setDownCommingPrice(BigDecimal downCommingPrice) {
 		this.downCommingPrice = downCommingPrice;
 	}
@@ -86,6 +103,20 @@ public class Strategy {
 	 */
 	public void setStopLossPrice(BigDecimal stopLossPrice) {
 		this.stopLossPrice = stopLossPrice;
+	}
+	/**
+	 * 交易数量
+	 * @return
+	 */
+	public BigDecimal getTransCount() {
+		return transCount;
+	}
+	/**
+	 * 交易数量
+	 * @param transCount
+	 */
+	public void setTransCount(BigDecimal transCount) {
+		this.transCount = transCount;
 	}
 	
 	

@@ -8,9 +8,7 @@ public class PropertiesConstants {
 
 	public static final String HUOBI_API_URL_PRO = "huobi.api.url"; 
 	
-	public static String HUOBI_API_URL = ConfigReader.getContextProperty(PropertiesConstants.HUOBI_API_URL_PRO);
+	public static String HUOBI_API_URL = "http://api.huobi.com/apiv3";
 	
-	//火币现货配置信息
-	public static String HUOBI_ACCESS_KEY = "";
-	public static String HUOBI_SECRET_KEY = "";
+	
 }

@@ -21,6 +21,8 @@ import org.warmsheep.vo.BuyMessageVo;
 import com.alibaba.fastjson.JSONObject;
 
 public class BasicStrategySchedule {
+	
+	
 
 	public int execute(Ticker currentTicker, Strategy currentStrategy){
 		try {
@@ -216,7 +218,11 @@ public class BasicStrategySchedule {
 		return realTimeOrderInfo;
 	}
 	
+	public void setService(HuobiService huobiService){
+		this.service = huobiService;
+	}
+	
 	private IOrderDao orderDao = new OrderDao();
-	private HuobiService service = new HuobiService(PropertiesConstants.HUOBI_ACCESS_KEY,PropertiesConstants.HUOBI_SECRET_KEY,PropertiesConstants.HUOBI_API_URL);
+	private HuobiService service;
 	private static final Logger LOGGER = LoggerFactory.getLogger(BasicStrategySchedule.class);
 }

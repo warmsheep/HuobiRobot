@@ -9,17 +9,23 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.warmsheep.constants.PropertiesConstants;
 import org.warmsheep.dao.IMarketDao;
 import org.warmsheep.dao.IOrderDao;
+import org.warmsheep.dao.IUserDao;
 import org.warmsheep.dao.impl.MarketDao;
 import org.warmsheep.dao.impl.OrderDao;
 import org.warmsheep.entity.Ticker;
+import org.warmsheep.entity.User;
 import org.warmsheep.enums.CoinType;
 import org.warmsheep.enums.OrderStatus;
 import org.warmsheep.enums.TransMode;
+import org.warmsheep.enums.TransType;
+import org.warmsheep.framework.db.exception.BaseCoreException;
 import org.warmsheep.huobi.HuobiService;
 import org.warmsheep.schedule.BasicStrategySchedule;
 import org.warmsheep.schedule.bean.Strategy;
+import org.warmsheep.service.IUserService;
 import org.warmsheep.util.ConvertUtil;
 import org.warmsheep.util.DateUtils;
+import org.warmsheep.vo.AccountInfoVo;
 import org.warmsheep.vo.RealTimeData;
 
 import com.alibaba.fastjson.JSONObject;
@@ -31,11 +37,12 @@ public class RobotMain {
 	private static Strategy currentStrategy = null;
 	
 	public static void main(String[] args) {
+		ClassPathXmlApplicationContext context = null;
 		try
 		{
 			System.setProperty("user.timezone","Asia/Shanghai");
 			TimeZone.setDefault(TimeZone.getTimeZone("Asia/Shanghai"));
-			ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
+			context = new ClassPathXmlApplicationContext(
 			        "classpath:spring/spring-context.xml");
 			context.start();
 		}
@@ -44,7 +51,20 @@ public class RobotMain {
 			LOGGER.error("== context start error:", e);
 		}
 		LOGGER.info("App Start!");
-		HuobiService service = new HuobiService(PropertiesConstants.HUOBI_ACCESS_KEY,PropertiesConstants.HUOBI_SECRET_KEY,PropertiesConstants.HUOBI_API_URL);
+		IUserService userService = context.getBean(IUserService.class);
+		User user = null;
+		HuobiService service = null;
+		
+		try {
+			user = userService.getById(1L);
+			service = new HuobiService(user.getHuobiAccessKey(),user.getHuobiSecretKey(),PropertiesConstants.HUOBI_API_URL);
+			String accountInfoJson = service.getAccountInfo(TransType.ACCOUNT_INFO.getValue());
+			AccountInfoVo accountInfoVo = JSONObject.parseObject(accountInfoJson,AccountInfoVo.class);
+			user = ConvertUtil.convertUser(accountInfoVo, user);
+			userService.updateById(user);
+		} catch (Exception e2) {
+			e2.printStackTrace();
+		}
 		
 		//看涨策略
 		Strategy upStrategy = new Strategy();
@@ -67,11 +87,11 @@ public class RobotMain {
 		Strategy centerStrategy  = new Strategy();
 		centerStrategy.setTransMode(TransMode.CENTER.getKey());
 		centerStrategy.setCoinType(CoinType.LTC.getKey());
-		centerStrategy.setUpCommingPrice(BigDecimal.valueOf(25.3));
+		centerStrategy.setUpCommingPrice(BigDecimal.valueOf(25.2));
 		centerStrategy.setDownCommingPrice(BigDecimal.valueOf(26.7));
 		centerStrategy.setTransCount(BigDecimal.valueOf(500));
 			
-		currentStrategy = downStrategy;
+		currentStrategy = centerStrategy;
 		while (true) {
 			String realTimeJson =  null;
 			BigDecimal ltcCurrentPrice = null;
@@ -110,6 +130,16 @@ public class RobotMain {
 				if(currentStrategy.getTransMode() == TransMode.UP.getKey() || currentStrategy.getTransMode() == TransMode.DOWN.getKey()){
 					currentStrategy = centerStrategy;
 				}
+				String accountInfoJson;
+				try {
+					accountInfoJson = service.getAccountInfo(TransType.ACCOUNT_INFO.getValue());
+					AccountInfoVo accountInfoVo = JSONObject.parseObject(accountInfoJson,AccountInfoVo.class);
+					user = ConvertUtil.convertUser(accountInfoVo, user);
+					userService.updateById(user);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
 			}
 		}
 	}

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.warmsheep.dao.impl.UserDao" >
+	<resultMap id="BaseResultMap" type="org.warmsheep.entity.User" >
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="userName" property="userName" jdbcType="VARCHAR" />
+		<result column="loginPwd" property="loginPwd" jdbcType="VARCHAR" />
+		<result column="total" property="total" jdbcType="DECIMAL" />
+		<result column="netAsset" property="netAsset" jdbcType="DECIMAL" />
+		<result column="availableCnyDisplay" property="availableCnyDisplay" jdbcType="DECIMAL" />
+		<result column="availableBtcDisplay" property="availableBtcDisplay" jdbcType="DECIMAL" />
+		<result column="availableLtcDisplay" property="availableLtcDisplay" jdbcType="DECIMAL" />
+		<result column="frozenCnyDisplay" property="frozenCnyDisplay" jdbcType="DECIMAL" />
+		<result column="frozenBtcDisplay" property="frozenBtcDisplay" jdbcType="DECIMAL" />
+		<result column="frozenLtcDisplay" property="frozenLtcDisplay" jdbcType="DECIMAL" />
+		<result column="loanCnyDisplay" property="loanCnyDisplay" jdbcType="DECIMAL" />
+		<result column="loanBtcDisplay" property="loanBtcDisplay" jdbcType="DECIMAL" />
+		<result column="loanLtcDisplay" property="loanLtcDisplay" jdbcType="DECIMAL" />
+		<result column="huobiAccessKey" property="huobiAccessKey" jdbcType="VARCHAR" />
+		<result column="huobiSecretKey" property="huobiSecretKey" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="table_name">wpUser</sql>
+	<sql id="select_base_field_sql">
+		id ,
+		userName ,
+		total ,
+		netAsset ,
+		availableCnyDisplay ,
+		availableBtcDisplay ,
+		availableLtcDisplay ,
+		frozenCnyDisplay ,
+		frozenBtcDisplay ,
+		frozenLtcDisplay ,
+		loanCnyDisplay ,
+		loanBtcDisplay ,
+		loanLtcDisplay ,
+		huobiAccessKey ,
+		huobiSecretKey
+	</sql>
+	<sql id="query_result_fields_sql">
+		id ,
+		userName ,
+		loginPwd ,
+		total ,
+		netAsset ,
+		availableCnyDisplay ,
+		availableBtcDisplay ,
+		availableLtcDisplay ,
+		frozenCnyDisplay ,
+		frozenBtcDisplay ,
+		frozenLtcDisplay ,
+		loanCnyDisplay ,
+		loanBtcDisplay ,
+		loanLtcDisplay ,
+		huobiAccessKey ,
+		huobiSecretKey
+	</sql>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+		delete from wpUser
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert"	useGeneratedKeys="true" keyProperty="id"	parameterType="org.warmsheep.entity.User" >
+		insert into wpUser (
+			id ,
+			userName ,
+			loginPwd ,
+			total ,
+			netAsset ,
+			availableCnyDisplay ,
+			availableBtcDisplay ,
+			availableLtcDisplay ,
+			frozenCnyDisplay ,
+			frozenBtcDisplay ,
+			frozenLtcDisplay ,
+			loanCnyDisplay ,
+			loanBtcDisplay ,
+			loanLtcDisplay ,
+			huobiAccessKey ,
+			huobiSecretKey
+		)
+		values (
+			#{id,jdbcType=BIGINT},
+			#{userName,jdbcType=VARCHAR} ,
+			#{loginPwd,jdbcType=VARCHAR} ,
+			#{total,jdbcType=DECIMAL} ,
+			#{netAsset,jdbcType=DECIMAL} ,
+			#{availableCnyDisplay,jdbcType=DECIMAL} ,
+			#{availableBtcDisplay,jdbcType=DECIMAL} ,
+			#{availableLtcDisplay,jdbcType=DECIMAL} ,
+			#{frozenCnyDisplay,jdbcType=DECIMAL} ,
+			#{frozenBtcDisplay,jdbcType=DECIMAL} ,
+			#{frozenLtcDisplay,jdbcType=DECIMAL} ,
+			#{loanCnyDisplay,jdbcType=DECIMAL} ,
+			#{loanBtcDisplay,jdbcType=DECIMAL} ,
+			#{loanLtcDisplay,jdbcType=DECIMAL} ,
+			#{huobiAccessKey,jdbcType=VARCHAR} ,
+			#{huobiSecretKey,jdbcType=VARCHAR}
+		)
+	</insert>
+	<update id="updateById" parameterType="org.warmsheep.entity.User" >
+		update wpUser
+		set 
+			<if test="userName != null and userName != ''">userName = #{userName,jdbcType=VARCHAR},</if>
+			<if test="total != null">total = #{total,jdbcType=VARCHAR},</if>
+			<if test="netAsset != null">netAsset = #{netAsset,jdbcType=DECIMAL},</if>
+			<if test="availableCnyDisplay != null">availableCnyDisplay = #{availableCnyDisplay,jdbcType=DECIMAL},</if>
+			<if test="availableBtcDisplay != null">availableBtcDisplay = #{availableBtcDisplay,jdbcType=DECIMAL},</if>
+			<if test="availableLtcDisplay != null">availableLtcDisplay = #{availableLtcDisplay,jdbcType=DECIMAL},</if>
+			<if test="frozenCnyDisplay != null">frozenCnyDisplay = #{frozenCnyDisplay,jdbcType=DECIMAL},</if>
+			<if test="frozenBtcDisplay != null">frozenBtcDisplay = #{frozenBtcDisplay,jdbcType=DECIMAL},</if>
+			<if test="frozenLtcDisplay != null">frozenLtcDisplay = #{frozenLtcDisplay,jdbcType=DECIMAL},</if>
+			<if test="loanCnyDisplay != null">loanCnyDisplay = #{loanCnyDisplay,jdbcType=DECIMAL},</if>
+			<if test="loanBtcDisplay != null">loanBtcDisplay = #{loanBtcDisplay,jdbcType=DECIMAL},</if>
+			<if test="loanLtcDisplay != null">loanLtcDisplay = #{loanLtcDisplay,jdbcType=DECIMAL},</if>
+			<if test="huobiAccessKey != null">huobiAccessKey = #{huobiAccessKey,jdbcType=VARCHAR},</if>
+			<if test="huobiSecretKey != null">huobiSecretKey = #{huobiSecretKey,jdbcType=VARCHAR},</if>
+			id = #{id,jdbcType=BIGINT}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+		select <include refid="select_base_field_sql"></include>
+		from wpUser
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<select id="selectAll" resultMap="BaseResultMap" >
+		select <include refid="select_base_field_sql"></include> from wpUser
+	</select>
+	
+	<select id="loginValidByLoginName" resultMap="BaseResultMap" parameterType="java.util.Map">
+		SELECT
+		<include refid="select_base_field_sql" />
+		FROM
+		<include refid="table_name" />
+		WHERE
+		userName = #{userName}
+		AND loginPwd = #{loginPassword}
+		AND deleteStatus = 0
+	</select>
+	
+	
+	<select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		SELECT <include refid="query_result_fields_sql" />
+		FROM <include refid="table_name" />
+		WHERE id = #{id,jdbcType=BIGINT}
+	</select>
+	
+	<update id="deleteById">
+		DELETE FROM
+		<include refid="table_name" />
+		WHERE
+		id = #{id,jdbcType=BIGINT}
+	</update>
+	
+</mapper>
